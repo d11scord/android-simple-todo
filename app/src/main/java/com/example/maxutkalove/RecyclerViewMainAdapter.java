@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,9 +34,9 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.todoTextView.setText(animal);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        String todoText = mData.get(position);
+        holder.todoTextView.setText(todoText);
     }
 
     // total number of rows
@@ -44,15 +45,17 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
         return mData.size();
     }
 
-
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView todoTextView;
+        ImageButton todoMenuButton;
 
         ViewHolder(View itemView) {
             super(itemView);
             todoTextView = itemView.findViewById(R.id.item_todo_text);
-            itemView.setOnClickListener(this);
+            todoMenuButton = itemView.findViewById(R.id.item_todo_menu);
+            todoMenuButton.setOnClickListener(this);
+            todoTextView.setOnClickListener(this);
         }
 
         @Override
